@@ -172,8 +172,6 @@ static const sai_attribute_entry_t        port_attribs[] = {
       "Port admin state", SAI_ATTR_VAL_TYPE_BOOL },
     { SAI_PORT_ATTR_MEDIA_TYPE, false, false, true, true,
       "Port media type", SAI_ATTR_VAL_TYPE_S32 },
-    { SAI_PORT_ATTR_DEFAULT_VLAN, false, false, true, true,
-      "Port default vlan", SAI_ATTR_VAL_TYPE_U16 },
     { SAI_PORT_ATTR_DEFAULT_VLAN_PRIORITY, false, false, true, true,
       "Port default vlan priority", SAI_ATTR_VAL_TYPE_U8 },
     { SAI_PORT_ATTR_INGRESS_FILTERING, false, false, true, true,
@@ -190,12 +188,12 @@ static const sai_attribute_entry_t        port_attribs[] = {
       "Port update DSCP", SAI_ATTR_VAL_TYPE_BOOL },
     { SAI_PORT_ATTR_MTU, false, false, true, true,
       "Port mtu", SAI_ATTR_VAL_TYPE_U32 },
-    { SAI_PORT_ATTR_FLOOD_STORM_CONTROL, false, false, true, true,
-      "Port flood storm control", SAI_ATTR_VAL_TYPE_BOOL },
-    { SAI_PORT_ATTR_BROADCAST_STORM_CONTROL, false, false, true, true,
-      "Port broadcast storm control", SAI_ATTR_VAL_TYPE_BOOL },
-    { SAI_PORT_ATTR_MULTICAST_STORM_CONTROL, false, false, true, true,
-      "Port multicast storm control", SAI_ATTR_VAL_TYPE_BOOL },
+    { SAI_PORT_ATTR_FLOOD_STORM_CONTROL_POLICER_ID, false, false, true, true,
+      "Port flood storm control", SAI_ATTR_VAL_TYPE_OID },
+    { SAI_PORT_ATTR_BROADCAST_STORM_CONTROL_POLICER_ID, false, false, true, true,
+      "Port broadcast storm control", SAI_ATTR_VAL_TYPE_OID },
+    { SAI_PORT_ATTR_MULTICAST_STORM_CONTROL_POLICER_ID, false, false, true, true,
+      "Port multicast storm control", SAI_ATTR_VAL_TYPE_OID },
     { SAI_PORT_ATTR_GLOBAL_FLOW_CONTROL, false, false, true, true,
       "Port global flow control", SAI_ATTR_VAL_TYPE_S32 },
     { SAI_PORT_ATTR_MAX_LEARNED_ADDRESSES, false, false, true, true,
@@ -254,11 +252,6 @@ static const sai_vendor_attribute_entry_t port_vendor_attribs[] = {
       { false, false, true, true },
       stub_port_media_type_get, NULL,
       stub_port_media_type_set, NULL },
-    { SAI_PORT_ATTR_DEFAULT_VLAN,
-      { false, false, true, true },
-      { false, false, true, true },
-      stub_port_default_vlan_get, NULL,
-      stub_port_default_vlan_set, NULL },
     { SAI_PORT_ATTR_DEFAULT_VLAN_PRIORITY,
       { false, false, true, true },
       { false, false, true, true },
@@ -299,21 +292,21 @@ static const sai_vendor_attribute_entry_t port_vendor_attribs[] = {
       { false, false, true, true },
       stub_port_mtu_get, NULL,
       stub_port_mtu_set, NULL },
-    { SAI_PORT_ATTR_FLOOD_STORM_CONTROL,
+    { SAI_PORT_ATTR_FLOOD_STORM_CONTROL_POLICER_ID,
       { false, false, true, true },
       { false, false, true, true },
-      stub_port_storm_control_get, (void*)SAI_PORT_ATTR_FLOOD_STORM_CONTROL,
-      stub_port_storm_control_set, (void*)SAI_PORT_ATTR_FLOOD_STORM_CONTROL },
-    { SAI_PORT_ATTR_BROADCAST_STORM_CONTROL,
+      stub_port_storm_control_get, (void*)SAI_PORT_ATTR_FLOOD_STORM_CONTROL_POLICER_ID,
+      stub_port_storm_control_set, (void*)SAI_PORT_ATTR_FLOOD_STORM_CONTROL_POLICER_ID },
+    { SAI_PORT_ATTR_BROADCAST_STORM_CONTROL_POLICER_ID,
       { false, false, true, true },
       { false, false, true, true },
-      stub_port_storm_control_get, (void*)SAI_PORT_ATTR_BROADCAST_STORM_CONTROL,
-      stub_port_storm_control_set, (void*)SAI_PORT_ATTR_BROADCAST_STORM_CONTROL },
-    { SAI_PORT_ATTR_MULTICAST_STORM_CONTROL,
+      stub_port_storm_control_get, (void*)SAI_PORT_ATTR_BROADCAST_STORM_CONTROL_POLICER_ID,
+      stub_port_storm_control_set, (void*)SAI_PORT_ATTR_BROADCAST_STORM_CONTROL_POLICER_ID },
+    { SAI_PORT_ATTR_MULTICAST_STORM_CONTROL_POLICER_ID,
       { false, false, true, true },
       { false, false, true, true },
-      stub_port_storm_control_get, (void*)SAI_PORT_ATTR_MULTICAST_STORM_CONTROL,
-      stub_port_storm_control_set, (void*)SAI_PORT_ATTR_MULTICAST_STORM_CONTROL },
+      stub_port_storm_control_get, (void*)SAI_PORT_ATTR_MULTICAST_STORM_CONTROL_POLICER_ID,
+      stub_port_storm_control_set, (void*)SAI_PORT_ATTR_MULTICAST_STORM_CONTROL_POLICER_ID },
     { SAI_PORT_ATTR_GLOBAL_FLOW_CONTROL,
       { false, false, false, false },
       { false, false, true, true },
@@ -1316,8 +1309,22 @@ sai_status_t stub_get_port_stats(_In_ sai_object_id_t                port_id,
     return SAI_STATUS_SUCCESS;
 }
 
+sai_status_t stub_clear_port_stats(_In_ sai_object_id_t                port_id,
+                                 _In_ const sai_port_stat_counter_t *counter_ids,
+                                 _In_ uint32_t                       number_of_counters)
+{
+  return SAI_STATUS_SUCCESS;
+}
+
+sai_status_t stub_clear_port_all_stats(_In_ sai_object_id_t                port_id)
+{
+  return SAI_STATUS_SUCCESS;
+}
+
 const sai_port_api_t port_api = {
     stub_set_port_attribute,
     stub_get_port_attribute,
-    stub_get_port_stats
+    stub_get_port_stats,
+    stub_clear_port_stats,
+    stub_clear_port_all_stats
 };

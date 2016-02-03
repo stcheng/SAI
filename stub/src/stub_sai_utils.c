@@ -194,7 +194,7 @@ sai_status_t check_attribs_metadata(_In_ uint32_t                            att
                 (!attr_present[ii])) {
                 STUB_LOG_ERR("Missing mandatory attribute %s on create\n", functionality_attr[ii].attrib_name);
                 free(attr_present);
-                return SAI_MANDATORY_ATTRIBUTE_MISSING;
+                return SAI_STATUS_MANDATORY_ATTRIBUTE_MISSING;
             }
         }
     }

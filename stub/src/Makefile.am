@@ -41,7 +41,7 @@ libsai_apiinclude_HEADERS = \
 	$(top_srcdir)/../inc/saineighbor.h \
 	$(top_srcdir)/../inc/saifdb.h \
 	$(top_srcdir)/../inc/saiport.h \
-	$(top_srcdir)/../inc/saiqos.h \
+	$(top_srcdir)/../inc/saiqosmaps.h \
 	$(top_srcdir)/../inc/saiacl.h \
 	$(top_srcdir)/../inc/saiswitch.h \
 	$(top_srcdir)/../inc/saistatus.h \

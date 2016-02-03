@@ -136,7 +136,7 @@ sai_status_t stub_create_host_interface(_Out_ sai_object_id_t     * hif_id,
                  find_attrib_in_list(attr_count, attr_list, SAI_HOSTIF_ATTR_RIF_OR_PORT_ID, &rif_port,
                                      &rif_port_index))) {
             STUB_LOG_ERR("Missing mandatory attribute rif port id on create of host if netdev type\n");
-            return SAI_MANDATORY_ATTRIBUTE_MISSING;
+            return SAI_STATUS_MANDATORY_ATTRIBUTE_MISSING;
         }
 
         if (SAI_OBJECT_TYPE_ROUTER_INTERFACE == sai_object_type_query(rif_port->oid)) {

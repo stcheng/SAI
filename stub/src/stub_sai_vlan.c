@@ -419,6 +419,13 @@ sai_status_t stub_get_vlan_stats(_In_ sai_vlan_id_t                  vlan_id,
     return SAI_STATUS_SUCCESS;
 }
 
+sai_status_t stub_clear_vlan_stats(_In_ sai_vlan_id_t                  vlan_id,
+                                 _In_ const sai_vlan_stat_counter_t *counter_ids,
+                                 _In_ uint32_t                       number_of_counters)
+{
+    return SAI_STATUS_SUCCESS;
+}
+
 /* Maximum number of learned MAC addresses [uint32_t]
  * zero means learning limit disable. (default to zero). */
 sai_status_t stub_vlan_max_learned_addr_get(_In_ const sai_object_key_t   *key,
@@ -492,5 +499,6 @@ const sai_vlan_api_t vlan_api = {
     stub_add_ports_to_vlan,
     stub_remove_ports_from_vlan,
     stub_remove_all_vlans,
-    stub_get_vlan_stats
+    stub_get_vlan_stats,
+    stub_clear_vlan_stats
 };
