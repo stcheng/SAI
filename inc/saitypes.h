@@ -196,7 +196,8 @@ typedef enum _sai_object_type_t {
     SAI_OBJECT_TYPE_TUNNEL_MAP       = 37,
     SAI_OBJECT_TYPE_TUNNEL           = 38,
     SAI_OBJECT_TYPE_TUNNEL_TABLE_ENTRY = 39,
-    SAI_OBJECT_TYPE_MAX              = 40
+    SAI_OBJECT_TYPE_VLAN_MEMBER      = 40,
+    SAI_OBJECT_TYPE_MAX              = 41
 } sai_object_type_t;
 
 typedef struct _sai_u8_list_t {
